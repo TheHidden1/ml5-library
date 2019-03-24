@@ -16,6 +16,9 @@ export default {
     filename: 'ml5.js',
     library: 'ml5',
   },
+  externals: {
+    "@tensorflow/tfjs": "tf"
+},
   module: {
     rules: [
       {

@@ -71,7 +71,7 @@ class YOLODetector {
   }
 
   async loadModel() {
-    this.model = await tf.loadModel(this.modelURL);
+    this.model = await tf.loadLayersModel(this.modelURL);
     this.modelReady = true;
     return this;
   }
@@ -186,9 +186,9 @@ class YOLODetector {
       if (input instanceof tf.Tensor) {
         image = input;
       } else if (input instanceof HTMLImageElement || input instanceof HTMLVideoElement || input instanceof ImageData || input instanceof HTMLCanvasElement) {
-        image = tf.fromPixels(input);
+        image = tf.browser.fromPixels(input);
       } else if (typeof img === 'object' && (image.elt instanceof HTMLImageElement || image.elt instanceof HTMLVideoElement)) {
-        image = tf.fromPixels(image.elt); // Handle p5.js image and video.
+        image = tf.browser.fromPixels(image.elt); // Handle p5.js image and video.
       }
       const [imgWidth, imgHeight] = [image.shape[1], image.shape[0]];
       // Normalize the image from [0, 255] to [0, 1].
